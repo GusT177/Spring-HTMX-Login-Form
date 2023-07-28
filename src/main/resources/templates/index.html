@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/htmx.org@1.9.4"></script>
+    <title>Login Form</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+   <header>
+     <h1>Login</h1>
+   </header>  
+
+
+ <main>
+
+  <form id="meuform" hx-post="/formprocess" hx-swap="outerHTML" >
+    <label>Email</label>
+    <input type="text" id="email" name="email" >
+    <label>Senha</label>
+    <input type="password" id="password" name="password">   
+    <button type="submit" >Enviar</button>
+  </form>
+
+
+ </main>
+ <script>
+
+
+ document.getElementById("meuform").addEventListener("htmx:afterRequest", function(evt) {
+   if(evt.detail.verb == "POST" && evt.detail.xhr.status === 200){
+    window.location.href = "/confirmation";
+   }
+
+ });
+</script>
+
+</body>
+</html>
